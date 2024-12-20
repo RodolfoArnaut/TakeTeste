@@ -2,7 +2,6 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-
 router.get('/repos/csharp', async (req, res) => {
     try {
         const org = 'takenet';
@@ -11,9 +10,7 @@ router.get('/repos/csharp', async (req, res) => {
         const response = await axios.get(url);
 
         const csharpRepos = response.data.filter(repo => repo.language === 'C#');
-
         const sortedRepos = csharpRepos.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-
         const top5Repos = sortedRepos.slice(0, 5).map(repo => ({
             name: repo.name,
             description: repo.description,
